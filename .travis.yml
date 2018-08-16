@@ -1,0 +1,29 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+jdk: oraclejdk8
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  # ACCOUNTS SERVICE
+  - export ACCOUNTS_SERVICE=vaibhavsood/microservice-accounts-service
+  - docker build -t $ACCOUNTS_SERVICE:$COMMIT ./accounts-service
+  - docker tag $ACCOUNTS_SERVICE:$COMMIT $ACCOUNTS_SERVICE:$TAG
+  - docker push $ACCOUNTS_SERVICE
+
+  # REGISTRATION SERVICE
+  - export REGISTRATION_SERVICE=vaibhavsood/microservice-registration-service
+  - docker build -t $REGISTRATION_SERVICE:$COMMIT ./registration-service
+  - docker tag $REGISTRATION_SERVICE:$COMMIT $REGISTRATION_SERVICE:$TAG
+  - docker push $REGISTRATION_SERVICE
+
+  # WEB SERVICE
+  - export WEB_SERVICE=vaibhavsood/microservice-accounts-service
+  - docker build -t $WEB_SERVICE:$COMMIT ./web-service
+  - docker tag $WEB_SERVICE:$COMMIT $WEB_SERVICE:$TAG
+  - docker push $WEB_SERVICE

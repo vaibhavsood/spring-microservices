@@ -10,7 +10,7 @@ install: true
 
 script:
   - ./mvnw compile
-  - ./mvnw install
+  - ./mvnw install -DskipTests=true
   
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS

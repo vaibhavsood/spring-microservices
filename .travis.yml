@@ -18,18 +18,18 @@ after_success:
 
   # ACCOUNTS SERVICE
   - export ACCOUNTS_SERVICE=vaibhavsood/microservice-accounts-service
-  - docker build -t $ACCOUNTS_SERVICE:$COMMIT ./accounts-service
-  - docker tag $ACCOUNTS_SERVICE:$COMMIT $ACCOUNTS_SERVICE:$TAG
+  - docker build -t $ACCOUNTS_SERVICE:$TRAVIS_COMMIT ./accounts-service
+  - docker tag $ACCOUNTS_SERVICE:$TRAVIS_COMMIT $ACCOUNTS_SERVICE:$TAG
   - docker push $ACCOUNTS_SERVICE
 
   # REGISTRATION SERVICE
   - export REGISTRATION_SERVICE=vaibhavsood/microservice-registration-service
-  - docker build -t $REGISTRATION_SERVICE:$COMMIT ./registration-service
-  - docker tag $REGISTRATION_SERVICE:$COMMIT $REGISTRATION_SERVICE:$TAG
+  - docker build -t $REGISTRATION_SERVICE:$TRAVIS_COMMIT ./registration-service
+  - docker tag $REGISTRATION_SERVICE:$TRAVIS_COMMIT $REGISTRATION_SERVICE:$TAG
   - docker push $REGISTRATION_SERVICE
 
   # WEB SERVICE
   - export WEB_SERVICE=vaibhavsood/microservice-accounts-service
-  - docker build -t $WEB_SERVICE:$COMMIT ./web-service
-  - docker tag $WEB_SERVICE:$COMMIT $WEB_SERVICE:$TAG
+  - docker build -t $WEB_SERVICE:$TRAVIS_COMMIT ./web-service
+  - docker tag $WEB_SERVICE:$TRAVIS_COMMIT $WEB_SERVICE:$TAG
   - docker push $WEB_SERVICE

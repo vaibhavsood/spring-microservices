@@ -29,7 +29,7 @@ after_success:
   - docker push $REGISTRATION_SERVICE
 
   # WEB SERVICE
-  - export WEB_SERVICE=vaibhavsood/microservice-accounts-service
+  - export WEB_SERVICE=vaibhavsood/microservice-web-service
   - docker build -t $WEB_SERVICE:$TRAVIS_COMMIT ./web-service
   - docker tag $WEB_SERVICE:$TRAVIS_COMMIT $WEB_SERVICE:$TAG
   - docker push $WEB_SERVICE
